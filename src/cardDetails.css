@@ -1,0 +1,63 @@
+.card-details {
+    padding: 20px;
+  }
+  
+  .card-details h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #666;
+    text-shadow: 10px 10px 2px rgba(0, 0, 0, 0.3);
+    font-family: "Montserrat Alternates", serif;
+    font-weight: 600;
+    font-style: normal;
+    margin: 10px;
+  }
+  
+  .card-details img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .card-details p {
+    font-size: 1.2rem;
+    color: #555;
+  }
+
+  label{
+    width: 50px
+  }
+
+  .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  .container {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .container svg {
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 50px;
+    width: 50px;
+    transition: all 0.3s;
+    fill: #666;
+  }
+  
+  .container svg:hover {
+    transform: scale(1.1);
+  }
+  
+  .container input:checked ~ svg {
+    fill: #ffeb49;
+  }
