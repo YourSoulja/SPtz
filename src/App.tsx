@@ -8,8 +8,6 @@ import { CardDetails } from './CardDetails';
 
 export interface Character {
   first_name: string;
-  name: string; 
-  image: string;
   description: string;
   bigDescription: string;
   imgLink: string;
@@ -37,15 +35,13 @@ function App() {
 
   if (charApi.length > 0) {
     charApi.forEach(personChar => {
-      charApiNameArray.push(personChar.name); 
+      charApiNameArray.push(personChar.first_name); 
       })
     charApi.forEach(personImg => {
-      charApImgArray.push(personImg.image); 
+      charApImgArray.push(personImg.imgLink); 
     }
   );
 
-  console.log(charApiNameArray)
-  console.log(charApiNameArray)
 
   }
   const data = [
@@ -169,7 +165,7 @@ const addToFavorites = (person: Character) => {
             <Route path="/favorite" element={<FavoritePage favoriteCards={favoriteCards} onRemoveFromFavorites={removeFromFavorites} />} />
             <Route path="/:first_name" element={
         <CardDetails
-          characters={data.map(person => ({ ...person, name: person.first_name, image: ''  }))}
+          characters={data}
           isFavorite={isFavorite}
           onAddToFavorites={addToFavorites}
         />

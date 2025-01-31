@@ -4,8 +4,6 @@ import { Link } from 'react-router';
 
 export interface Character {
   first_name: string;
-  name: string; 
-  image: string;
   description: string;
   bigDescription: string;
   imgLink: string;
@@ -48,7 +46,7 @@ export const FavoritePage = ({ favoriteCards, onRemoveFromFavorites }: { favorit
               description={person.description}
               imgLink={person.imgLink}
               onAddToFavorites={() => onRemoveFromFavorites(person)}
-              isFavorite={true} name={""} image={""}            >
+              isFavorite={true}          >
               <Link to={`/${person.first_name}`}>
                 <button className="button1">
                   <span>Подробнее</span>

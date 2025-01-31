@@ -2,8 +2,6 @@ import { Link } from 'react-router';
 import './cards.css';
 
 interface CardsProps {
-  name: string;
-  image: string;
   title: string;
   description?: string;
   imgLink?: string;
