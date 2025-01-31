@@ -2,6 +2,8 @@ import { Link } from 'react-router';
 import './cards.css';
 
 interface CardsProps {
+  name: string;
+  image: string;
   title: string;
   description?: string;
   imgLink?: string;
@@ -12,7 +14,7 @@ interface CardsProps {
 
 
 function Cards(props: CardsProps) {
-  const { title, description, imgLink, onAddToFavorites, isFavorite, } = props;
+  const { title, description, imgLink, onAddToFavorites, isFavorite,} = props;
 
   return (
     <div className="card">

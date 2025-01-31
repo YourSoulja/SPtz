@@ -25,7 +25,6 @@ function App() {
   const [charApi, setCharApi] = useState<Character[]>([]); 
 
   useEffect(() => {
-    console.log("I'm working");
     fetch("https://rickandmortyapi.com/api/character")
       .then((r) => r.json())
       .then(r => {
@@ -44,6 +43,9 @@ function App() {
       charApImgArray.push(personImg.image); 
     }
   );
+
+  console.log(charApiNameArray)
+  console.log(charApiNameArray)
 
   }
   const data = [

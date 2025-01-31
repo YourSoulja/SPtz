@@ -48,8 +48,7 @@ export const FavoritePage = ({ favoriteCards, onRemoveFromFavorites }: { favorit
               description={person.description}
               imgLink={person.imgLink}
               onAddToFavorites={() => onRemoveFromFavorites(person)}
-              isFavorite={true}
-            >
+              isFavorite={true} name={""} image={""}            >
               <Link to={`/${person.first_name}`}>
                 <button className="button1">
                   <span>Подробнее</span>

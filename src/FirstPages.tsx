@@ -17,8 +17,7 @@ export const FirstPage = ({ characters, addToFavorites, favoriteCards }: FirstPa
           description={person.description}
           imgLink={person.imgLink}
           onAddToFavorites={() => addToFavorites(person)}
-          isFavorite={favoriteCards.some(card => card.first_name === person.first_name)}
-        />
+          isFavorite={favoriteCards.some(card => card.first_name === person.first_name)} name={''} image={''}        />
       ))}
     </div>
   );
