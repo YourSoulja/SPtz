@@ -2,7 +2,7 @@ import { Link } from 'react-router';
 import './cards.css';
 
 interface CardsProps {
-  title: string;
+  first_name: string;
   description?: string;
   imgLink?: string;
   onAddToFavorites: () => void;
@@ -13,19 +13,19 @@ interface CardsProps {
 
 function Cards(props: CardsProps) {
   
-  const { title, description, imgLink, onAddToFavorites, isFavorite,} = props;
+  const { first_name, description, imgLink, onAddToFavorites, isFavorite,} = props;
 
   return (
     <div className="card">
       <div className="card2">
         <div>
           <div className='cardImgH1'>
-            <img src={imgLink} alt={title} />
-            <h1>{title}</h1>
+            <img src={imgLink} alt={first_name} />
+            <h1>{first_name}</h1>
           </div>
           <p>{description}</p>
           <div className="button-container">
-            <Link to={`/${title}`}>
+            <Link to={`/${first_name}`}>
               <button className="button1">
                 <span>Подробнее</span>
               </button>

@@ -43,7 +43,7 @@ export const FavoritePage = ({ favoriteCards, onRemoveFromFavorites }: { favorit
           {filteredCards.map(person => (
             <Cards
               key={person.first_name}
-              title={person.first_name}
+              first_name={person.first_name}
               description={person.description}
               imgLink={person.imgLink}
               onAddToFavorites={() => onRemoveFromFavorites(person)}

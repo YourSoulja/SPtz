@@ -1,7 +1,7 @@
 import { useParams } from 'react-router';
 import { Character } from './App';
 import './cardDetails.css'
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent } from 'react';
 
 interface CardDetailsProps {
   characters: Character[];
@@ -17,33 +17,9 @@ export const CardDetails = ({ characters, isFavorite }: CardDetailsProps) => {
     return <div>Персонаж не найден</div>;
   }
 
-    const [charApi, setCharApi] = useState<Character[]>([]); 
-  
-    useEffect(() => {
-      fetch("https://rickandmortyapi.com/api/character")
-        .then((r) => r.json())
-        .then(r => {
-          setCharApi(r.results); 
-        });
-    }, []);
-    
-    let charApiNameArray: string[] = []; 
-    let charApImgArray: string[] = []; 
-  
-    if (charApi.length > 0) {
-      charApi.forEach(personChar => {
-        charApiNameArray.push(personChar.first_name); 
-        })
-      charApi.forEach(personImg => {
-        charApImgArray.push(personImg.imgLink); 
-      }
-    );
-  }
-  
   function onAddToFavorites(_event: ChangeEvent<HTMLInputElement>): void {
     throw new Error('Function not implemented.');
   }
-
   return (
     <div className="card-details">
       <h1>{character.first_name}</h1>
