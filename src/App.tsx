@@ -21,7 +21,7 @@ const filterName = (searchText: string, listName: Character[]) => {
 }
 
 function App() {
-  const [charApi, setCharApi] = useState<Character[]>([]); 
+  const [, setCharApi] = useState<Character[]>([]); 
   const [nameList, setNameList] = useState<Character[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [favoriteCards, setFavoriteCards] = useState<Character[]>([]);
@@ -33,7 +33,7 @@ function App() {
       .then((r) => r.json())
       .then(r => {
         setCharApi(r.results); 
-        const updatedData = r.results.map((character: any, index: number) => ({
+        const updatedData = r.results.map((character: any) => ({
           first_name: character.name,
           description: "Описание отсутствует",
           bigDescription: "Описание отсутствует",
