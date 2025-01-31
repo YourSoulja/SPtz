@@ -12,6 +12,7 @@ interface CardsProps {
 
 
 function Cards(props: CardsProps) {
+  
   const { title, description, imgLink, onAddToFavorites, isFavorite,} = props;
 
   return (
@@ -59,6 +60,8 @@ function Cards(props: CardsProps) {
       </div>
     </div>
   );
+
+  
 }
 
 export default Cards;

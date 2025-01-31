@@ -18,6 +18,7 @@ export const FavoritePage = ({ favoriteCards, onRemoveFromFavorites }: { favorit
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [filteredCards, setFilteredCards] = useState<Character[]>(favoriteCards);
 
+  
   useEffect(() => {
     const debounce = setTimeout(() => {
       const filteredName = filterName(searchTerm, favoriteCards);

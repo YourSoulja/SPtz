@@ -8,6 +8,7 @@ interface FirstPageProps {
 }
 
 export const FirstPage = ({ characters, addToFavorites, favoriteCards }: FirstPageProps) => {
+  
   return (
     <div className="cards-container">
       {characters.map(person => (
