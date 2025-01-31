@@ -7,7 +7,7 @@ createRoot(document.getElementById('root')!).render(
   <BrowserRouter basename='/SPtz/'>
       <StrictMode>
       <App />
-    </StrictMode>,
+    </StrictMode>
   </BrowserRouter>
 
 )

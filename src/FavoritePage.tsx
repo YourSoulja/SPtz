@@ -2,10 +2,13 @@ import { useEffect, useState } from "react";
 import Cards from "./Cards";
 import { Link } from 'react-router';
 
-interface Character {
+export interface Character {
   first_name: string;
-  description?: string;
-  imgLink?: string;
+  name: string; 
+  image: string;
+  description: string;
+  bigDescription: string;
+  imgLink: string;
 }
 
 const filterName = (searchText: string, listName: Character[]) => {
@@ -44,7 +47,6 @@ export const FavoritePage = ({ favoriteCards, onRemoveFromFavorites }: { favorit
               title={person.first_name}
               description={person.description}
               imgLink={person.imgLink}
-                
               onAddToFavorites={() => onRemoveFromFavorites(person)}
               isFavorite={true}
             >

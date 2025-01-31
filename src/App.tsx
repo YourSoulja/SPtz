@@ -8,9 +8,11 @@ import { CardDetails } from './CardDetails';
 
 export interface Character {
   first_name: string;
-  description?: string;
-  bigDescription?: string;
-  imgLink?: string;
+  name: string; 
+  image: string;
+  description: string;
+  bigDescription: string;
+  imgLink: string;
 }
 
 const filterName = (searchText: string, listName: Character[]) => {
@@ -19,31 +21,55 @@ const filterName = (searchText: string, listName: Character[]) => {
 }
 
 function App() {
+
+  const [charApi, setCharApi] = useState<Character[]>([]); 
+
+  useEffect(() => {
+    console.log("I'm working");
+    fetch("https://rickandmortyapi.com/api/character")
+      .then((r) => r.json())
+      .then(r => {
+        setCharApi(r.results); 
+      });
+  }, []);
   
+  let charApiNameArray: string[] = []; 
+  let charApImgArray: string[] = []; 
+
+  if (charApi.length > 0) {
+    charApi.forEach(personChar => {
+      charApiNameArray.push(personChar.name); 
+      })
+    charApi.forEach(personImg => {
+      charApImgArray.push(personImg.image); 
+    }
+  );
+
+  }
   const data = [
-    { first_name: "Трэйси Марроу", description: "Знаменитый рэпер с Земли", bigDescription: "Знаменитый рэпер с Земли, на самом деле являющийся нестареющим блуждающим пришельцем из времен под названием Water-T.", imgLink: "public/img/Tracy.jpg" },
-    { first_name: "Абрадольф", description: "Результат эксперимента ", bigDescription: "Результат эксперимента в эпизоде 'Ricksy Business'. Был создан, когда Рик попытался создать идеального лидера путем скрещивания ДНК Авраама Линкольна и Адольфа Гитлера", imgLink: "public/img/Abradolph.jpg" },
-    { first_name: "Бет Смит", description: "Дочь Рика, мать Морти и жена Джерри", bigDescription: "Дочь Рика, мать Морти и жена Джерри. 34 года. Работает кардиохирургом-ветеринаром — преимущественно лошадиным.Имеет проблемы с алкоголем, считает себя неполноценной. Ханжа", imgLink: "public/img/Bet.jpg" },
-    { first_name: "Брэд", description: "Ученик Гарри Херпсонской", bigDescription: "Ученик Гарри Херпсонской старшей школы, парень Джессики.", imgLink: "public/img/Bred.jpg" },
-    { first_name: "Джейкоб", description: "Друг семьи родителей Джерри ", bigDescription: "Друг семьи родителей Джерри и, как выяснилось позже, любовник Джойс. Впервые упоминается в серии 'Anatomy Park'.", imgLink: "public/img/Jacob.jpg" },
-    { first_name: "Джерри Смит", description: "Ричард Джеральд 'Джерри' Смит Отец Морти, муж Бетти", bigDescription: 'Ричард Джеральд "Джерри" Смит Отец Морти, муж Бетти. Наивный и глупый человек с кучей комплексов.Работает во второсортном рекламном агентстве, из-за чего часто сидит без работы. Поклонник фильма "Титаник".',imgLink: "public/img/Djerry.jpg" },
-    { first_name: "Джессика", description: "Привлекательная девушка", bigDescription: "Привлекательная девушка, которая учится вместе с Морти в математическом классе и в которую он влюблен. Встречается с Бредом, но на самом деле не любит его.", imgLink: "public/img/Jesica.jpg" },
-    { first_name: "Джойс Смит", description: "Мать Джерри", bigDescription: "Мать Джерри, бабушка Морти по отцовской лини, жена Леонарда. Из-за импотенции её мужа, завела любовника Джейкоба.", imgLink: "public/img/Djoy.jpg" },
-    { first_name: "Доктор Ксенон Блум", description: "Блум — амеба", bigDescription: 'Один из главных героев в эпизоде "Anatomy Park". Блум — амеба, соучредитель Anatomy Park.', imgLink: "public/img/Dr.jpg" },
-    { first_name: "Дуфус Рик", description: "Наименее уважаемый из Риков", bigDescription: 'Наименее уважаемый из Риков, но также самый добрый из них. Впервые появился в серии "Close Rick-Counters of the Rick Kind"', imgLink: "public/img/Dufus.jpg" },
-    { first_name: "Дэвин", description: "Коллега Бет в Госпитале ", bigDescription: "Коллега Бет в Госпитале Св. Эквуса. Влюблен в нее, постоянно пытается соблазнить и завоевать ее.", imgLink: "public/img/Davin.jpg" },
-    { first_name: "Зип Ханфлорп", description: "Ученый из 'Микровселенной Батареи'", bigDescription: 'Ученый из "Микровселенной Батареи" Рика, который создает собственную микро-планету под названием "Miniverse".', imgLink: "public/img/Zip.jpg" },
-    { first_name: "Злой Морти", description: "Одна из бесконечных версий Морти", bigDescription: 'Одна из бесконечных версий Морти. Впервые появился в серии "Close Rick-Counters of the Rick Kind" как второстепенный антагонист.', imgLink: "public/img/BadM.jpg" },
-    { first_name: "Злой Рик", description: "Главный антагонист", bigDescription: 'Появляющийся в серии "Close Rick-Counters of the Rick Kind" главный антагонист.', imgLink: "public/img/BadR.jpg" },
-    { first_name: "Итан", description: "Бывший парень Саммер", bigDescription: 'Бывший парень Саммер. Появился в эпизоде "Anatomy Park".', imgLink: "public/img/Ithan.jpg" },
-    { first_name: "Кевин", description: "Скромный Зигерион", bigDescription: 'Второстепенный персонаж, показанный в эпизоде "M. Night Shaym-Aliens!". Скромный Зигерион, которого постоянно дразнят за тормозной характер.', imgLink: "public/img/Kevin.jpg" },
-    { first_name: "Ковбой Морти", description: "Появляется в серии ", bigDescription: 'Ковбой Морти появляется в серии "Close Rick-Counters of the Rick Kind" вместе с Ковбоем Риком.', imgLink: "public/img/CowboyM.jpg" },
-    { first_name: "Ковбой Рик", description: "Ковбой Рик появляется в серии ", bigDescription: 'Ковбой Рик появляется в серии "Close Rick-Counters of the Rick Kind" вместе с Ковбоем Морти.', imgLink: "public/img/CowboyRick.jpg" },
-    { first_name: "Король Желатин", description: "Гигантское антропоморфное желе", bigDescription: 'Впервые появившееся в эпизоде "Meeseeks and Destroy" гигантское антропоморфное желе. Король.', imgLink: "public/img/King.jpg" },
-    { first_name: "Король Флиппи Нипс", description: "Правитель Плутона", bigDescription: 'Правитель Плутона. Впервые появился в эпизоде "Something Ricked This Way Comes" в качестве второстепенного антагониста.', imgLink: "public/img/KingTwo.jpg" },
+    { first_name: charApiNameArray[0], description: "Гениальный, но циничный ученый, который путешествует по мультивселенной со своим внуком Морти.", bigDescription: " Рик Санчез — эксцентричный и гениальный ученый, известный своими изобретениями и способностью путешествовать между измерениями. Несмотря на свой интеллект, он часто проявляет цинизм, эгоизм и склонность к алкоголизму. Рик часто втягивает свою семью, особенно Морти, в опасные приключения.", imgLink: charApImgArray[0] },
+    { first_name: charApiNameArray[1], description: "Внук Рика, наивный и добросердечный подросток, который часто оказывается в опасных ситуациях.", bigDescription: "Морти Смит — 14-летний мальчик, который сопровождает своего деда Рика в его безумных приключениях. Несмотря на свою наивность и неуверенность, Морти часто проявляет храбрость и сострадание. Его отношения с Риком сложны, так как он часто становится жертвой опасных экспериментов деда.", imgLink: charApImgArray[1]},
+    { first_name: charApiNameArray[2], description: "Старшая сестра Морти, которая иногда присоединяется к приключениям Рика.", bigDescription: "Саммер Смит — типичный подросток, который стремится к популярности и признанию. Несмотря на свою внешнюю уверенность, она часто чувствует себя недооцененной. Со временем Саммер начинает больше участвовать в приключениях Рика, проявляя смелость и находчивость.", imgLink: charApImgArray[2] },
+    { first_name: charApiNameArray[3], description: "Дочь Рика, мать Морти и Саммер, работающая ветеринаром-кардиохирургом.", bigDescription: "Бет Смит — сильная и независимая женщина, которая пытается совмещать карьеру и семейную жизнь. Её отношения с отцом, Риком, сложны из-за его долгого отсутствия в её жизни. Бет часто сомневается в своих решениях, особенно в отношении семьи и работы.", imgLink: charApImgArray[3] },
+    { first_name: charApiNameArray[4], description: "Отец Морти и Саммер, муж Бет, часто неудачлив и не уверен в себе.", bigDescription: "Джерри Смит — типичный неудачник, который постоянно пытается доказать свою значимость. Он часто конфликтует с Риком, которого считает плохим влиянием на свою семью. Несмотря на свои недостатки, Джерри любит свою семью и пытается быть хорошим отцом.", imgLink: charApImgArray[4] },
+    { first_name: charApiNameArray[5], description: "Принцесса из кластера Абаданго, с которой Рик и Морти сталкиваются в одном из своих приключений.", bigDescription: 'Принцесса Абаданго — инопланетная особа королевских кровей, которая обладает уникальными способностями. Она появляется в эпизоде, где Рик и Морти пытаются решить её проблемы, что приводит к неожиданным последствиям.',imgLink: charApImgArray[5] },
+    { first_name: charApiNameArray[6], description: "Гибрид Авраама Линкольна и Адольфа Гитлера, созданный Риком.", bigDescription: "Абрадольф Линклер — результат эксперимента Рика по созданию идеального лидера. Он сочетает в себе черты двух исторических личностей, что приводит к внутреннему конфликту между добром и злом. Его появление добавляет сюжету мультсериала элемент философского размышления.", imgLink: charApImgArray[6] },
+    { first_name: charApiNameArray[7], description: "Рик из параллельной вселенной, который служит судьёй в Совете Риков.", bigDescription: "Аджудикатор Рик — один из многих Риков в мультивселенной, который занимает важную должность в Совете Риков. Он отвечает за поддержание порядка среди различных версий Рика и часто сталкивается с главным Риком из-за его анархичных поступков.", imgLink: charApImgArray[7] },
+    { first_name: charApiNameArray[8], description: "Руководитель агентства, с которым сталкиваются Рик и Морти.", bigDescription: 'Директор агентства — бюрократ, который пытается контролировать действия Рика и Морти. Его персонаж часто служит сатирой на государственные структуры и их неэффективность.', imgLink: charApImgArray[8] },
+    { first_name: charApiNameArray[9], description: "Призрак, который может создавать поезда из ниоткуда.", bigDescription: 'Алан Рейлс — уникальный персонаж, который использует свои способности для борьбы с несправедливостью. Его появление добавляет в сюжет элемент фантазии и неожиданности.', imgLink: charApImgArray[9] },
+    { first_name: charApiNameArray[10], description: "Версия Альберта Эйнштейна в мультивселенной Rick and Morty.", bigDescription: "В мультсериале Эйнштейн представлен как один из многих гениев, с которыми Рик взаимодействует. Его персонаж служит отсылкой к реальному учёному и добавляет юмористический элемент.", imgLink: charApImgArray[10] },
+    { first_name: charApiNameArray[11], description: "Персонаж, который появляется в одном из эпизодов, связанных с приключениями Рика и Морти.", bigDescription: 'Александр — второстепенный персонаж, чьи действия часто приводят к комическим ситуациям. Его роль в сюжете обычно связана с взаимодействием с главными героями.', imgLink: charApImgArray[11] },
+    { first_name: charApiNameArray[12], description: "Инопланетное существо, с которым сталкиваются Рик и Морти.", bigDescription: 'Гуга — один из многих инопланетных существ, которые добавляют в сюжет элемент фантастики и юмора. Его уникальные способности и поведение делают его запоминающимся персонажем.', imgLink: charApImgArray[12] },
+    { first_name: charApiNameArray[13], description: "Версия Морти из параллельной вселенной.", bigDescription: 'Инопланетный Морти — один из многих вариантов Морти в мультивселенной. Его появление часто связано с сюжетами, затрагивающими тему мультиверса.', imgLink: charApImgArray[13] },
+    { first_name: charApiNameArray[14], description: "Версия Рика из параллельной вселенной.", bigDescription: 'Инопланетный Рик — ещё один вариант главного героя, который может иметь совершенно другие черты характера и мотивации. Его появление добавляет глубины в исследование мультивселенной.', imgLink: charApImgArray[14] },
+    { first_name: charApiNameArray[15], description: "Кибернетический организм, живущий в амишской общине.", bigDescription: 'Амишский киборг — уникальный персонаж, который сочетает в себе традиции амишей и высокие технологии. Его появление служит сатирой на конфликт между традициями и прогрессом.', imgLink: charApImgArray[15] },
+    { first_name: charApiNameArray[16], description: "Персонаж, который появляется в одном из эпизодов, связанных с приключениями Рика и Морти.", bigDescription: 'Энни — второстепенный персонаж, чьи действия часто приводят к комическим ситуациям. Её роль в сюжете обычно связана с взаимодействием с главными героями', imgLink: charApImgArray[16] },
+    { first_name: charApiNameArray[17], description: "Версия Морти с антеннами на голове.", bigDescription: 'Морти с антеннами — один из многих вариантов Морти в мультивселенной. Его уникальная внешность и способности делают его запоминающимся персонажем.', imgLink: charApImgArray[17] },
+    { first_name: charApiNameArray[18], description: "Версия Рика с антеннами на голове.", bigDescription: 'Рик с антеннами — ещё один вариант главного героя, который может иметь совершенно другие черты характера и мотивации. Его появление добавляет глубины в исследование мультивселенной.', imgLink: charApImgArray[18] },
+    { first_name: charApiNameArray[19], description: "Персонаж, который утверждает, что у него муравьи в глазах.", bigDescription: 'Джонсон — комический персонаж, чья фраза "у меня муравьи в глазах" стала мемом. Его появление добавляет в сюжет элемент абсурдного юмора.', imgLink: charApImgArray[19] },
   ];
 
-  const [nameList, setNameList] = useState<Character[]>(data);
+  const [nameList, setNameList] = useState<Character[]>(data.map(person => ({ ...person, name: person.first_name, image: '' })));
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [favoriteCards, setFavoriteCards] = useState<Character[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -52,7 +78,7 @@ function App() {
 
   useEffect(() => {
     const debounce = setTimeout(() => {
-      const filteredName = filterName(searchTerm, data);
+      const filteredName = filterName(searchTerm, data.map(person => ({ ...person, name: person.first_name, image: ''  })));//+
       setNameList(filteredName);
     }, 300);
     return () => clearTimeout(debounce);
@@ -81,7 +107,7 @@ const addToFavorites = (person: Character) => {
     <>
       <header>
         <Link to='/'>
-          <img src="src/assets/img/rickAndMorty.png" alt="" />
+          <img src="./img/rickAndMorty.png" alt="" />
         </Link>
         <Link to='/favorite'>
           <button className="button2">
@@ -136,11 +162,18 @@ const addToFavorites = (person: Character) => {
             )}
 
           </>
-          
+
         } />
             <Route path="/favorite" element={<FavoritePage favoriteCards={favoriteCards} onRemoveFromFavorites={removeFromFavorites} />} />
-            <Route path="/:first_name" element={<CardDetails characters={data} isFavorite={isFavorite} onAddToFavorites={addToFavorites} />} />
+            <Route path="/:first_name" element={
+        <CardDetails
+          characters={data.map(person => ({ ...person, name: person.first_name, image: ''  }))}
+          isFavorite={isFavorite}
+          onAddToFavorites={addToFavorites}
+        />
+      } />
             </Routes>
+
     </>
   );
 }
